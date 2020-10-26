@@ -19,11 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d52e1996-07d3-4492-b0b2-6fba29f4b076" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/node/helpers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/node/helpers.ts" afterDir="false" />
-    </list>
+    <list default="true" id="d52e1996-07d3-4492-b0b2-6fba29f4b076" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -218,13 +214,6 @@
     <configuration />
   </component>
   <component name="TaskManager">
-    <task id="LOCAL-00002" summary="Precommit OK.">
-      <created>1590575306225</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1590575306225</updated>
-    </task>
     <task id="LOCAL-00003" summary="SHA-1: bc2d2f929f5656162efd700717bbb3bb3b362238&#10;&#10;* Merge branch 'browser-helpers' into node-module&#10;&#10;# Conflicts:&#10;#&#9;.browserslistrc&#10;#&#9;.eslintrc&#10;#&#9;.idea/runConfigurations/Intern_Dev.xml&#10;#&#9;.idea/runConfigurations/Intern_Dev_Video.xml&#10;#&#9;.idea/workspace.xml&#10;#&#9;.travis.yml&#10;#&#9;configs/demo.js&#10;#&#9;configs/prod.js&#10;#&#9;env/babel/configs/intern.js&#10;#&#9;env/intern/configs/constants.js&#10;#&#9;env/intern/configs/dev-video/intern.js&#10;#&#9;env/intern/configs/dev-video/mocha.js&#10;#&#9;env/intern/configs/dev/mocha.js&#10;#&#9;env/intern/helpers/.eslintrc&#10;#&#9;env/intern/helpers/assert.js&#10;#&#9;env/intern/helpers/base.js&#10;#&#9;env/intern/helpers/log.js&#10;#&#9;env/intern/helpers/open-window.js&#10;#&#9;env/intern/helpers/svelte.js&#10;#&#9;env/intern/mocha-helpers.js&#10;#&#9;env/intern/register-intern.js&#10;#&#9;env/karma/configs/ci.js&#10;#&#9;env/karma/configs/coverage.js&#10;#&#9;env/karma/configs/dev.js&#10;#&#9;env/karma/configs/performance.js&#10;#&#9;env/karma/configs/tests.js&#10;#&#9;env/karma/helpers.js&#10;#&#9;env/rollup/babel.js&#10;#&#9;env/rollup/postcss.js&#10;#&#9;env/rollup/svelte.js&#10;#&#9;env/scripts/index.js&#10;#&#9;env/scripts/specific/tests.js&#10;#&#9;modules/browser/browser-debug/.eslintrc&#10;#&#9;modules/browser/browser-debug/helpers/get-debug-info.js&#10;#&#9;package.json&#10;#&#9;src/test/performance/browser/isBrowser.js&#10;#&#9;src/test/tests/browser/env/component.js&#10;#&#9;src/test/tests/browser/isBrowser.js&#10;#&#9;src/test/tests/common/env/modules.js&#10;#&#9;src/test/tests/webdriver/.eslintrc">
       <created>1590576269979</created>
       <option name="number" value="00003" />
@@ -466,7 +455,7 @@
       <workItem from="1601798784029" duration="33000" />
       <workItem from="1603712771658" duration="2307000" />
       <workItem from="1603715088908" duration="9104000" />
-      <workItem from="1603724938379" duration="2955000" />
+      <workItem from="1603724938379" duration="3267000" />
     </task>
     <task id="LOCAL-00036" summary="Fix travis">
       <created>1590675855678</created>
@@ -573,7 +562,14 @@
       <option name="project" value="LOCAL" />
       <updated>1603726937308</updated>
     </task>
-    <option name="localTasksCounter" value="51" />
+    <task id="LOCAL-00051" summary="Fix ReadMe">
+      <created>1603727903474</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1603727903474</updated>
+    </task>
+    <option name="localTasksCounter" value="52" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -670,10 +666,10 @@
       <screen x="0" y="0" width="1920" height="882" />
     </state>
     <state x="409" y="84" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.882@0.0.1920.882" timestamp="1603725774448" />
-    <state x="484" y="0" key="CommitChangelistDialog2" timestamp="1603726936754">
+    <state x="484" y="0" key="CommitChangelistDialog2" timestamp="1603727902917">
       <screen x="0" y="0" width="1920" height="882" />
     </state>
-    <state x="484" y="0" key="CommitChangelistDialog2/0.0.1920.882@0.0.1920.882" timestamp="1603726936754" />
+    <state x="484" y="0" key="CommitChangelistDialog2/0.0.1920.882@0.0.1920.882" timestamp="1603727902917" />
     <state width="845" height="574" key="DebuggerActiveHint" timestamp="1603724550208">
       <screen x="0" y="0" width="1920" height="882" />
     </state>

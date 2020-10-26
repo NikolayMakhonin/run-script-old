@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 /* eslint-disable global-require */
 import {run, setGlobalConfig, getGlobalConfig} from './helpers'
 import yargs from 'yargs'
