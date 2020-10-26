@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import colors from 'kleur'
-import {createColorRegexp, removeColor} from './src/main/node'
+const colors = require('kleur')
+const {createColorRegexp, removeColor} = require('./dist/dev/js/main/node')
 
 const errorTextRegExp = /[^\r\n]*(\b[1-9]\d* *(fail|err)|[✗×]|fatal error|error occur)[^\r\n]*/i
 const errorColorRegExp = createColorRegexp([
