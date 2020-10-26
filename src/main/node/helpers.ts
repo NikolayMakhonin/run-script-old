@@ -1,40 +1,13 @@
 // eslint-disable-next-line max-len
 /* eslint-disable no-unused-vars,callback-return,no-process-exit,no-process-env,no-extra-semi,@typescript-eslint/no-extra-semi */
-import {ChildProcess, spawn} from 'child_process'
+import {spawn} from 'child_process'
+import colors from 'kleur'
 // import spawn from 'spawn-command-with-kill'
 import psTree from 'ps-tree'
-import colors from 'kleur'
 import readline from 'readline'
-import {Stream} from 'stream'
+import {IRunOptions} from './contracts'
+import {getGlobalConfig} from './globalConfig'
 // import kill from 'tree-kill'
-
-export interface ProcessEnv {
-	[key: string]: string | undefined;
-}
-
-type StdioOptions = 'pipe' | 'ignore' | 'inherit' | Array<('pipe' | 'ipc' | 'ignore' | 'inherit' | Stream | number | null | undefined)>;
-type StdioNull = 'inherit' | 'ignore' | Stream;
-type StdioPipe = undefined | null | 'pipe';
-type StdioPipeOrNull = StdioNull | StdioPipe;
-export type TStdIO = StdioOptions | [StdioPipeOrNull, StdioPipeOrNull, StdioPipeOrNull]
-
-export type TextPredicate = (text: string, next: TextPredicate) => boolean
-export type ErrorSearch = (text: string, next: ErrorSearch) => string | void | null | false
-
-export interface IRunOptions {
-	env?: ProcessEnv,
-	timeout?: number,
-	notAutoKill?: boolean,
-	stdio?: TStdIO,
-	shell?: boolean,
-	prepareProcess?: (proc: ChildProcess) => void,
-}
-
-export interface IGlobalConfig {
-	logFilter?: TextPredicate,
-	stdOutIsError?: ErrorSearch,
-	stdErrIsError?: TextPredicate,
-}
 
 // region helpers
 
@@ -66,19 +39,6 @@ export function removeColor(message) {
 
 // endregion
 
-// region globalconfig
-
-let globalConfig: IGlobalConfig = {}
-
-export function getGlobalConfig(): IGlobalConfig {
-	return globalConfig
-}
-export function setGlobalConfig(config: IGlobalConfig) {
-	globalConfig = config
-}
-
-// endregion
-
 // region output handlers
 
 // region stdOutSearchError
@@ -96,8 +56,8 @@ const errorColorRegExp = createColorRegexp([
 ])
 
 function stdOutSearchError(text: string) {
-	return globalConfig.stdOutIsError
-		? globalConfig.stdOutIsError(text, _stdOutSearchError)
+	return getGlobalConfig().stdOutIsError
+		? getGlobalConfig().stdOutIsError(text, _stdOutSearchError)
 		: _stdOutSearchError(text)
 }
 
@@ -135,8 +95,8 @@ function correctLog(message) {
 }
 
 function stdErrIsError(text: string) {
-	return globalConfig.stdErrIsError
-		? globalConfig.stdErrIsError(text, _stdErrIsError)
+	return getGlobalConfig().stdErrIsError
+		? getGlobalConfig().stdErrIsError(text, _stdErrIsError)
 		: _stdErrIsError(text)
 }
 
@@ -197,12 +157,14 @@ function _stdErrIsError(text: string) {
 // region logFilter
 
 function logFilter(text: string) {
-	return globalConfig.logFilter
-		? globalConfig.logFilter(text, _logFilter)
+	return getGlobalConfig().logFilter
+		? getGlobalConfig().logFilter(text, _logFilter)
 		: _logFilter(text)
 }
 
 function _logFilter(text: string) {
+	text = removeColor(text)
+
 	// sapper export
 	if (/\s{4,}\S\s[^\w\r\n]*node_modules/.test(text)) {
 		return false

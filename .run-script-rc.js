@@ -15,6 +15,8 @@ const errorColorRegExp = createColorRegexp([
 
 module.exports = {
 	logFilter(text) {
+		text = removeColor(text)
+
 		// sapper export
 		if (/\s{4,}\S\s[^\w\r\n]*node_modules/.test(text)) {
 			return false

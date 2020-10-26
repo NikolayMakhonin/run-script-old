@@ -1,10 +1,9 @@
 #!/usr/bin/env node
 
+import {GLOBAL_CONFIG_ENV} from './contracts'
 /* eslint-disable global-require */
-import {run, setGlobalConfig, getGlobalConfig} from './helpers'
+import {run} from './helpers'
 import yargs from 'yargs'
-import path from 'path'
-import fs from 'fs'
 
 const argv = yargs(process.argv)
 	.option('config', {
@@ -14,23 +13,21 @@ const argv = yargs(process.argv)
 	})
 	.argv
 
-const configFile = path.resolve(process.cwd(), argv.config || '.run-script-rc.js')
 const script = argv._[argv._.length - 1]
 
-if (fs.existsSync(configFile)) {
-	const config = require(configFile)
-	setGlobalConfig({
-		...getGlobalConfig(),
-		...config,
-	})
-} else if (argv.config) {
-	throw new Error('Config file not found: ' + configFile)
-}
-
-module.exports = run(
-	`node -e "${script.replace(/"/g, '""')}"`,
-	{
-		notAutoKill: true,
-		stdio      : 'inherit',
-	},
-)
+module.exports = (async () => {
+	try {
+		await run(
+			`node -e "${script.replace(/"/g, '""')}"`,
+			{
+				notAutoKill: true,
+				stdio      : 'inherit',
+				env        : {
+					[GLOBAL_CONFIG_ENV]: argv.config || void 0,
+				},
+			},
+		)
+	} finally {
+		delete process.env[GLOBAL_CONFIG_ENV]
+	}
+})()
