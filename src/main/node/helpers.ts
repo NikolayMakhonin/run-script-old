@@ -21,6 +21,21 @@ export type TStdIO = StdioOptions | [StdioPipeOrNull, StdioPipeOrNull, StdioPipe
 export type TextPredicate = (text: string, next: TextPredicate) => boolean
 export type ErrorSearch = (text: string, next: ErrorSearch) => string | void | null | false
 
+export interface IRunOptions {
+	env?: ProcessEnv,
+	timeout?: number,
+	notAutoKill?: boolean,
+	stdio?: TStdIO,
+	shell?: boolean,
+	prepareProcess?: (proc: ChildProcess) => void,
+}
+
+export interface IGlobalConfig {
+	logFilter?: TextPredicate,
+	stdOutIsError?: ErrorSearch,
+	stdErrIsError?: TextPredicate,
+}
+
 // region helpers
 
 function escapeRegExp(string) {
@@ -53,18 +68,12 @@ export function removeColor(message) {
 
 // region globalconfig
 
-export type TGlobalConfig = {
-	logFilter?: TextPredicate,
-	stdOutIsError?: ErrorSearch,
-	stdErrIsError?: TextPredicate,
-}
+let globalConfig: IGlobalConfig = {}
 
-let globalConfig: TGlobalConfig = {}
-
-export function getGlobalConfig(): TGlobalConfig {
+export function getGlobalConfig(): IGlobalConfig {
 	return globalConfig
 }
-export function setGlobalConfig(config: TGlobalConfig) {
+export function setGlobalConfig(config: IGlobalConfig) {
 	globalConfig = config
 }
 
@@ -390,14 +399,7 @@ export function run(command, {
 	stdio,
 	shell = true,
 	prepareProcess,
-}: {
-	env?: ProcessEnv,
-	timeout?: number,
-	notAutoKill?: boolean,
-	stdio?: TStdIO,
-	shell?: boolean,
-	prepareProcess?: (proc: ChildProcess) => void,
-} = {}): Promise<void> {
+}: IRunOptions = {}): Promise<void> {
 	return new Promise<void>((resolve, reject) => {
 		if (wasKillAll) {
 			reject('Was kill all')
