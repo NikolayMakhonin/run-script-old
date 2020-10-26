@@ -216,13 +216,6 @@
     <configuration />
   </component>
   <component name="TaskManager">
-    <task id="LOCAL-00004" summary="Merge branch 'browser-helpers' into node-module&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;package.json">
-      <created>1590578318992</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1590578318992</updated>
-    </task>
     <task id="LOCAL-00005" summary="Precommit OK.">
       <created>1590647720502</created>
       <option name="number" value="00005" />
@@ -450,7 +443,7 @@
       <workItem from="1601798784029" duration="33000" />
       <workItem from="1603712771658" duration="2307000" />
       <workItem from="1603715088908" duration="9104000" />
-      <workItem from="1603724938379" duration="3619000" />
+      <workItem from="1603724938379" duration="3946000" />
     </task>
     <task id="LOCAL-00036" summary="Fix travis">
       <created>1590675855678</created>
@@ -571,7 +564,14 @@
       <option name="project" value="LOCAL" />
       <updated>1603728273053</updated>
     </task>
-    <option name="localTasksCounter" value="53" />
+    <task id="LOCAL-00053" summary="Fix dependencies">
+      <created>1603728585883</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1603728585883</updated>
+    </task>
+    <option name="localTasksCounter" value="54" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -632,7 +632,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Dialogs in process..." />
     <MESSAGE value="Devices in process..." />
     <MESSAGE value="Battery marker" />
     <MESSAGE value="Develop devices" />
@@ -657,7 +656,8 @@
     <MESSAGE value="Completed" />
     <MESSAGE value="Fix ReadMe" />
     <MESSAGE value="Fix cli" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix cli" />
+    <MESSAGE value="Fix dependencies" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix dependencies" />
   </component>
   <component name="WindowStateProjectService">
     <state x="552" y="24" key="#Watch" timestamp="1603713334805">
@@ -668,10 +668,10 @@
       <screen x="0" y="0" width="1920" height="882" />
     </state>
     <state x="409" y="84" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.882@0.0.1920.882" timestamp="1603725774448" />
-    <state x="484" y="0" key="CommitChangelistDialog2" timestamp="1603728272508">
+    <state x="484" y="0" key="CommitChangelistDialog2" timestamp="1603728585337">
       <screen x="0" y="0" width="1920" height="882" />
     </state>
-    <state x="484" y="0" key="CommitChangelistDialog2/0.0.1920.882@0.0.1920.882" timestamp="1603728272508" />
+    <state x="484" y="0" key="CommitChangelistDialog2/0.0.1920.882@0.0.1920.882" timestamp="1603728585337" />
     <state width="845" height="574" key="DebuggerActiveHint" timestamp="1603724550208">
       <screen x="0" y="0" width="1920" height="882" />
     </state>
