@@ -19,7 +19,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d52e1996-07d3-4492-b0b2-6fba29f4b076" name="Default Changelist" comment="" />
+    <list default="true" id="d52e1996-07d3-4492-b0b2-6fba29f4b076" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -469,7 +471,7 @@
       <workItem from="1601798784029" duration="33000" />
       <workItem from="1603712771658" duration="2307000" />
       <workItem from="1603715088908" duration="9104000" />
-      <workItem from="1603724938379" duration="1543000" />
+      <workItem from="1603724938379" duration="1961000" />
     </task>
     <task id="LOCAL-00036" summary="Fix travis">
       <created>1590675855678</created>
@@ -562,7 +564,14 @@
       <option name="project" value="LOCAL" />
       <updated>1603726284216</updated>
     </task>
-    <option name="localTasksCounter" value="49" />
+    <task id="LOCAL-00049" summary="Completed">
+      <created>1603726619079</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1603726619079</updated>
+    </task>
+    <option name="localTasksCounter" value="50" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -659,10 +668,10 @@
       <screen x="0" y="0" width="1920" height="882" />
     </state>
     <state x="409" y="84" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.882@0.0.1920.882" timestamp="1603725774448" />
-    <state x="484" y="0" key="CommitChangelistDialog2" timestamp="1603726283669">
+    <state x="484" y="0" key="CommitChangelistDialog2" timestamp="1603726618451">
       <screen x="0" y="0" width="1920" height="882" />
     </state>
-    <state x="484" y="0" key="CommitChangelistDialog2/0.0.1920.882@0.0.1920.882" timestamp="1603726283669" />
+    <state x="484" y="0" key="CommitChangelistDialog2/0.0.1920.882@0.0.1920.882" timestamp="1603726618451" />
     <state width="845" height="574" key="DebuggerActiveHint" timestamp="1603724550208">
       <screen x="0" y="0" width="1920" height="882" />
     </state>
@@ -743,10 +752,10 @@
       <screen x="0" y="0" width="1920" height="882" />
     </state>
     <state x="343" y="0" key="SettingsEditor/0.0.1920.882@0.0.1920.882" timestamp="1603717377482" />
-    <state x="-1" y="0" width="1921" height="880" key="find.popup" timestamp="1603726209203">
+    <state x="-1" y="0" width="1921" height="880" key="find.popup" timestamp="1603726851942">
       <screen x="0" y="0" width="1920" height="882" />
     </state>
-    <state x="-1" y="0" width="1921" height="880" key="find.popup/0.0.1920.882@0.0.1920.882" timestamp="1603726209203" />
+    <state x="-1" y="0" width="1921" height="880" key="find.popup/0.0.1920.882@0.0.1920.882" timestamp="1603726851942" />
     <state x="539" y="-1" key="search.everywhere.popup" timestamp="1603712829750">
       <screen x="0" y="0" width="1920" height="882" />
     </state>
