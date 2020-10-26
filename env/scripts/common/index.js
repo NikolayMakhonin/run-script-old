@@ -5,18 +5,10 @@ const buildTypes = singleCall(async () => {
 	await reCreateDir('dist/types')
 	await run('tsc --outDir dist/types --declaration')
 })
-const buildPolyfill = singleCall(() => run(
-	'node env/libs/polyfill/build.js',
-	{env: {APP_CONFIG: 'dev'}},
-))
-const buildLibs = singleCall(() => Promise.all([
-	buildPolyfill(),
-]))
 const clean = singleCall(() => deletePaths('{*.log,__sapper__}'))
 const build = singleCall(() => Promise.all([
 	// clean(),
 	buildTypes(),
-	buildLibs(),
 ]))
 
 const lintEs = singleCall(async ({fix} = {}) => {
@@ -36,6 +28,4 @@ module.exports = {
 	lint,
 	clean,
 	build,
-	buildLibs,
-	buildPolyfill,
 }

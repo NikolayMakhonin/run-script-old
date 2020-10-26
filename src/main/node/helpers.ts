@@ -18,6 +18,199 @@ type StdioPipe = undefined | null | 'pipe';
 type StdioPipeOrNull = StdioNull | StdioPipe;
 export type TStdIO = StdioOptions | [StdioPipeOrNull, StdioPipeOrNull, StdioPipeOrNull]
 
+export type TextPredicate = (text: string, next: TextPredicate) => boolean
+export type ErrorSearch = (text: string, next: ErrorSearch) => string | void | null | false
+
+// region helpers
+
+function escapeRegExp(string) {
+	return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') // $& means the whole matched string
+}
+
+// region color
+
+export function getColorPrefix(colorFunc) {
+	const colorText = colorFunc('COLOR')
+	return colorText.match(/^(.*)COLOR/s)[1]
+}
+
+// eslint-disable-next-line @typescript-eslint/no-shadow
+export function createColorRegexp(colors: colors.Color[]) {
+	return new RegExp(`[^\\r\\n]*(${colors
+		.map(getColorPrefix)
+		.map(escapeRegExp)
+		.join('|')})[^\\r\\n]*`)
+}
+
+export function removeColor(message) {
+	// eslint-disable-next-line no-control-regex
+	return message.replace(/\u001B\[\d+m/g, '')
+}
+
+// endregion
+
+// endregion
+
+// region globalconfig
+
+export type TGlobalConfig = {
+	logFilter?: TextPredicate,
+	stdOutIsError?: ErrorSearch,
+	stdErrIsError?: TextPredicate,
+}
+
+let globalConfig: TGlobalConfig = {}
+
+export function getGlobalConfig(): TGlobalConfig {
+	return globalConfig
+}
+export function setGlobalConfig(config: TGlobalConfig) {
+	globalConfig = config
+}
+
+// endregion
+
+// region output handlers
+
+// region stdOutSearchError
+
+// const errorTextRegExp = /\b(err(ors?)?|warn(ings?)?|fail(ed|ure|s)?)\b|[✗]/i
+const errorTextRegExp = /[^\r\n]*(\b[1-9]\d* *(fail|err)|[✗×]|fatal error|error occur)[^\r\n]*/i
+const errorColorRegExp = createColorRegexp([
+	colors.bold,
+	colors.red,
+	colors.magenta,
+	// colors.yellow,
+	colors.bgRed,
+	colors.bgMagenta,
+	// colors.bgYellow,
+])
+
+function stdOutSearchError(text: string) {
+	return globalConfig.stdOutIsError
+		? globalConfig.stdOutIsError(text, _stdOutSearchError)
+		: _stdOutSearchError(text)
+}
+
+function _stdOutSearchError(text: string) {
+	const errorColor = text.match(errorColorRegExp)
+	text = removeColor(text)
+
+	if (errorColor
+		// at least 10 letters
+		&& (/(\w\W*){10,}/s).test(text)
+		&& !(/√/s).test(text)
+		// electron-builder
+		&& !(/[┌│]/s).test(text)
+		// sapper: "189 kB client.905ef984.js"
+		&& !(/\b\d+\s+\w+\s+\S+\.js\b/.test(text) && text.length < 100)
+	) {
+		return `ERROR COLOR: ${errorColor[0]}`
+	}
+
+	const errorText = text.match(errorTextRegExp)
+	if (errorText) {
+		return `ERROR TEXT: ${errorText[0]}`
+	}
+
+	return false
+}
+
+// endregion
+
+// region stdErrIsError
+
+function correctLog(message) {
+	message = message.replace(/^\s{20,}/, '')
+	return message
+}
+
+function stdErrIsError(text: string) {
+	return globalConfig.stdErrIsError
+		? globalConfig.stdErrIsError(text, _stdErrIsError)
+		: _stdErrIsError(text)
+}
+
+function _stdErrIsError(text: string) {
+	text = removeColor(text)
+
+	if (text.length < 20) {
+		return false
+	}
+
+	if (/openssl config failed/.test(text)) {
+		return false
+	}
+
+	// web storm
+	if (/Debugger attached|Debugger listening on|Waiting for the debugger|nodejs.*inspector/.test(text)) {
+		return false
+	}
+
+	// rollup
+	if (/treating it as an external dependency|\bcreated\b.*\.js in \d|\bFinished in\b/.test(text)) {
+		return false
+	}
+	if (text.indexOf('→') >= 0) {
+		return false
+	}
+
+	// someone package is outdated
+	if (/\bnpm update\b/.test(text)) {
+		return false
+	}
+
+	// terminate process
+	if (/^\^[A-Z]$/.test(text)) {
+		return false
+	}
+
+	// experimental warnings
+	if (/ExperimentalWarning: Conditional exports is an experimental feature. This feature could change at any time/.test(text)) {
+		return false
+	}
+
+	// Entry module "rollup.config.js" is implicitly using "default" export mode,
+	// which means for CommonJS outputthat its default export is assigned to "module.exports".
+	// For many tools, such CommonJS output will not be interchangeable with the original ES module.
+	// If this is intended, explicitly set "output.exports" to either "auto" or "default",
+	// otherwise you might want to consider changing the signature of "rollup.config.js"
+	// to use named exports only.
+	if (/explicitly set "output.exports" to either "auto" or "default"/.test(text)) {
+		return false
+	}
+
+	return true
+}
+
+// endregion
+
+// region logFilter
+
+function logFilter(text: string) {
+	return globalConfig.logFilter
+		? globalConfig.logFilter(text, _logFilter)
+		: _logFilter(text)
+}
+
+function _logFilter(text: string) {
+	// sapper export
+	if (/\s{4,}\S\s[^\w\r\n]*node_modules/.test(text)) {
+		return false
+	}
+
+	// Empty space
+	if (/^\s*$/s.test(text)) {
+		return false
+	}
+
+	return true
+}
+
+// endregion
+
+// endregion
+
 // interface ProcessEnvOptions {
 // 	uid?: number;
 // 	gid?: number;
@@ -61,11 +254,11 @@ process.on('SIGBREAK', () => {
 })
 
 process.on('beforeExit', () => {
-	console.log('beforeExit')
+	// console.log('beforeExit')
 	killAll()
 })
 process.on('exit', () => {
-	console.log('exit')
+	// console.log('exit')
 	killAll()
 })
 
@@ -101,137 +294,6 @@ function printRunStates() {
 
 function printError(prefix, err) {
 	console.error(colors.red().bold(`${prefix}: ${err && err.stack || err && err.toString() || err}`))
-}
-
-function getColorPrefix(colorFunc) {
-	const colorText = colorFunc('COLOR')
-	return colorText.match(/^(.*)COLOR/s)[1]
-}
-
-const colorPrefixes = {
-	bold     : getColorPrefix(colors.red),
-	red      : getColorPrefix(colors.red),
-	magenta  : getColorPrefix(colors.magenta),
-	yellow   : getColorPrefix(colors.yellow),
-	bgRed    : getColorPrefix(colors.bgRed),
-	bgMagenta: getColorPrefix(colors.bgMagenta),
-	bgYellow : getColorPrefix(colors.bgYellow),
-}
-
-function escapeRegExp(string) {
-	return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') // $& means the whole matched string
-}
-
-// const errorTextRegExp = /\b(err(ors?)?|warn(ings?)?|fail(ed|ure|s)?)\b|[✗]/i
-const errorTextRegExp = /[^\r\n]*(\b[1-9]\d* *(fail|err)|[✗×]|fatal error|error occur)[^\r\n]*/i
-const errorColorRegExp = new RegExp(`[^\\r\\n]*(${[
-	colorPrefixes.bold,
-	colorPrefixes.red,
-	colorPrefixes.magenta,
-	// colorPrefixes.yellow,
-	colorPrefixes.bgRed,
-	colorPrefixes.bgMagenta,
-	// colorPrefixes.bgYellow,
-].map(escapeRegExp).join('|')})[^\\r\\n]*`)
-
-function searchError(message) {
-	const errorColor = message.match(errorColorRegExp)
-	message = removeColor(message)
-
-	if (errorColor
-		// at least 10 letters
-		&& (/(\w\W*){10,}/s).test(message)
-		&& !(/√/s).test(message)
-		// electron-builder
-		&& !(/[┌│]/s).test(message)
-		// sapper: "189 kB client.905ef984.js"
-		&& !(/\b\d+\s+\w+\s+\S+\.js\b/.test(message) && message.length < 100)
-	) {
-		return `ERROR COLOR: ${errorColor[0]}`
-	}
-
-	const errorText = message.match(errorTextRegExp)
-	if (errorText) {
-		return `ERROR TEXT: ${errorText[0]}`
-	}
-
-	return false
-}
-
-function logFilter(message) {
-	// sapper export
-	if (/\s{4,}\S\s[^\w\r\n]*node_modules/.test(message)) {
-		return false
-	}
-
-	// Empty space
-	if (/^\s*$/s.test(message)) {
-		return false
-	}
-
-	return true
-}
-
-function correctLog(message) {
-	message = message.replace(/^\s{20,}/, '')
-	return message
-}
-
-function removeColor(message) {
-	// eslint-disable-next-line no-control-regex
-	return message.replace(/\u001B\[\d+m/g, '')
-}
-
-function checkIsError(message) {
-	message = removeColor(message)
-
-	if (message.length < 20) {
-		return false
-	}
-
-	if (/openssl config failed/.test(message)) {
-		return false
-	}
-
-	// web storm
-	if (/Debugger attached|Debugger listening on|Waiting for the debugger|nodejs.*inspector/.test(message)) {
-		return false
-	}
-
-	// rollup
-	if (/treating it as an external dependency|\bcreated\b.*\.js in \d|\bFinished in\b/.test(message)) {
-		return false
-	}
-	if (message.indexOf('→') >= 0) {
-		return false
-	}
-
-	// someone package is outdated
-	if (/\bnpm update\b/.test(message)) {
-		return false
-	}
-
-	// terminate process
-	if (/^\^[A-Z]$/.test(message)) {
-		return false
-	}
-
-	// experimental warnings
-	if (/ExperimentalWarning: Conditional exports is an experimental feature. This feature could change at any time/.test(message)) {
-		return false
-	}
-
-	// Entry module "rollup.config.js" is implicitly using "default" export mode,
-	// which means for CommonJS outputthat its default export is assigned to "module.exports".
-	// For many tools, such CommonJS output will not be interchangeable with the original ES module.
-	// If this is intended, explicitly set "output.exports" to either "auto" or "default",
-	// otherwise you might want to consider changing the signature of "rollup.config.js"
-	// to use named exports only.
-	if (/explicitly set "output.exports" to either "auto" or "default"/.test(message)) {
-		return false
-	}
-
-	return true
 }
 
 function addProcess(proc) {
@@ -399,7 +461,7 @@ export function run(command, {
 					_resolve()
 				}
 			})
-			.on('message', (message, sendHandle) => {
+			.on('message', (message) => {
 				console.log(`process.message: ${message}`)
 			})
 			.on('error', err => {
@@ -411,7 +473,7 @@ export function run(command, {
 				input   : proc.stdout,
 				terminal: false,
 			}).on('line', line => {
-				const error = searchError(line)
+				const error = stdOutSearchError(line)
 				if (logFilter(line)) {
 					line = correctLog(line)
 					process.stdout.write(`${line}\r\n`)
@@ -427,7 +489,7 @@ export function run(command, {
 				input   : proc.stderr,
 				terminal: false,
 			}).on('line', line => {
-				if (checkIsError(line)) {
+				if (stdErrIsError(line)) {
 					process.stdout.write(`STDERR: ${line}\r\n`)
 					_reject(line)
 					return

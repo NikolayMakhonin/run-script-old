@@ -53,8 +53,6 @@
 		"lint": "node ./env/scripts/run.js \"require('./env/scripts/common').lint().stopOnError()\"",
 		"lint:fix": "node ./env/scripts/run.js \"require('./env/scripts/common').lint({fix: true}).stopOnError()\"",
 		"-------- build --------": "",
-		"build:polyfill": "node ./env/scripts/run.js \"require('./env/scripts/common').buildPolyfill().stopOnError()\"",
-		"build:libs": "node ./env/scripts/run.js \"require('./env/scripts/common').buildLibs().stopOnError()\"",
 		"build:dev": "node ./env/scripts/run.js \"require('./env/scripts').buildAll(['dev']).stopOnError()\"",
 		"-------- test --------": "",
 		"test:dev": "node ./env/scripts/run.js \"require('./env/scripts').testAll(['dev'], { build: false }).stopOnError()\"",
@@ -93,6 +91,7 @@
 		"@types/chai": "^4.2.14",
 		"@types/mocha": "^8.0.3",
 		"@types/node": "^14.14.3",
+		"@types/yargs": "^15.0.9",
 		"@typescript-eslint/eslint-plugin": "^4.3.0",
 		"@typescript-eslint/parser": "^4.3.0",
 		"babel-plugin-root-import": "^6.5.0",
@@ -136,5 +135,8 @@
 		"shx": "^0.3.2",
 		"typescript": "^4.0.3",
 		"webrain": "^1.2.2-a"
+	},
+	"dependencies": {
+		"yargs": "^16.1.0"
 	}
 }
