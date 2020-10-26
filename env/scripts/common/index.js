@@ -12,16 +12,11 @@ const buildPolyfill = singleCall(() => run(
 const buildLibs = singleCall(() => Promise.all([
 	buildPolyfill(),
 ]))
-const buildGyp = singleCall(async () => {
-	await run('node-gyp configure')
-	await run('node-gyp build')
-})
 const clean = singleCall(() => deletePaths('{*.log,__sapper__}'))
 const build = singleCall(() => Promise.all([
 	// clean(),
 	buildTypes(),
 	buildLibs(),
-	buildGyp(),
 ]))
 
 const lintEs = singleCall(async ({fix} = {}) => {
@@ -43,5 +38,4 @@ module.exports = {
 	build,
 	buildLibs,
 	buildPolyfill,
-	buildGyp,
 }

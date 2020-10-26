@@ -1,3 +1,1 @@
-export function main() {
-	return true
-}
+export default { }
