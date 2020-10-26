@@ -1,6 +1,6 @@
 {
 	"name": "@flemist/run-script",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"description": "Use JavaScript instead npm scripts",
 	"author": {
 		"name": "Nikolay Makhonin",
@@ -115,11 +115,9 @@
 		"fs-extra": "^9.0.1",
 		"globby": "^11.0.1",
 		"json5": "^2.1.0",
-		"kleur": "^4.1.1",
 		"mocha": "^8.1.3",
 		"ncat": "^4.0.2",
 		"nyc": "^15.1.0",
-		"ps-tree": "^1.2.0",
 		"regenerator-runtime": "^0.13.7",
 		"require-from-memory": "^1.0.2",
 		"rollup": "^2.27.1",
@@ -135,6 +133,8 @@
 	},
 	"dependencies": {
 		"yargs": "^16.1.0",
-		"@babel/runtime-corejs3": "^7.11.2"
+		"@babel/runtime-corejs3": "^7.11.2",
+		"ps-tree": "^1.2.0",
+		"kleur": "^4.1.1"
 	}
 }
