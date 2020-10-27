@@ -437,13 +437,17 @@ export function run(command, {
 				input   : proc.stdout,
 				terminal: false,
 			}).on('line', line => {
-				const error = stdOutSearchError(line)
-				if (logFilter(line)) {
-					line = correctLog(line)
-					process.stdout.write(`${line}\r\n`)
-				}
-				if (error) {
-					_reject(`ERROR DETECTED: ${error}`)
+				try {
+					const error = stdOutSearchError(line)
+					if (logFilter(line)) {
+						line = correctLog(line)
+						process.stdout.write(`${line}\r\n`)
+					}
+					if (error) {
+						_reject(`ERROR DETECTED: ${error}`)
+					}
+				} catch (ex) {
+					_reject(ex)
 				}
 			})
 		}
@@ -453,12 +457,16 @@ export function run(command, {
 				input   : proc.stderr,
 				terminal: false,
 			}).on('line', line => {
-				if (stdErrIsError(line)) {
-					process.stdout.write(`STDERR: ${line}\r\n`)
-					_reject(line)
-					return
+				try {
+					if (stdErrIsError(line)) {
+						process.stdout.write(`STDERR: ${line}\r\n`)
+						_reject(line)
+						return
+					}
+					process.stdout.write(`${line}\r\n`)
+				} catch (ex) {
+					_reject(ex)
 				}
-				process.stdout.write(`${line}\r\n`)
 			})
 		}
 
