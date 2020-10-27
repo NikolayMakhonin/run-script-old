@@ -5,7 +5,7 @@ import colors from 'kleur'
 // import spawn from 'spawn-command-with-kill'
 import psTree from 'ps-tree'
 import readline from 'readline'
-import {IRunOptions} from './contracts'
+import {IRunOptions, RunStatus} from './contracts'
 import {getGlobalConfig} from './globalConfig'
 // import kill from 'tree-kill'
 
@@ -248,13 +248,13 @@ function printRunStates() {
 		} sec): ${state.command}`
 
 		switch (state.status) {
-			case 'RUNNED':
+			case RunStatus.RUNNED:
 				console.log(colors.blue(message))
 				break
-			case 'SUCCESS':
+			case RunStatus.SUCCESS:
 				console.log(colors.cyan(message))
 				break
-			case 'ERROR':
+			case RunStatus.ERROR:
 				console.error(colors.red(message))
 				break
 			default:
@@ -350,7 +350,7 @@ function killAll(isFailure?: boolean) {
 		const pids = procs.map(o => o.pid)
 		killByPids(...pids)
 		printRunStates()
-		if (isFailure) {
+		if (isFailure || runStates.some(o => o.status === RunStatus.ERROR)) {
 			process.exit(1)
 		}
 	}, 2000)
@@ -373,7 +373,7 @@ export function run(command, {
 		console.log(colors.blue(`RUN: ${command}`))
 
 		const runState = {
-			status   : 'RUNNED',
+			status   : RunStatus.RUNNED,
 			timeStart: Date.now(),
 			timeEnd  : void 0 as number,
 			command,
@@ -381,13 +381,13 @@ export function run(command, {
 		runStates.push(runState)
 
 		const _resolve = () => {
-			runState.status = 'SUCCESS'
+			runState.status = RunStatus.SUCCESS
 			runState.timeEnd = Date.now()
 			resolve()
 		}
 
 		const _reject = err => {
-			runState.status = 'ERROR'
+			runState.status = RunStatus.ERROR
 			runState.timeEnd = Date.now()
 			reject(err)
 		}

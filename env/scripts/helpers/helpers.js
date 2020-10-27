@@ -33,19 +33,19 @@ const runStates = []
 
 process.on('SIGTERM', () => {
 	console.log('SIGTERM')
-	killAll()
+	killAll(true)
 })
 process.on('SIGHUP', () => {
 	console.log('SIGHUP')
-	killAll()
+	killAll(true)
 })
 process.on('SIGINT', () => {
 	console.log('SIGINT')
-	killAll()
+	killAll(true)
 })
 process.on('SIGBREAK', () => {
 	console.log('SIGBREAK')
-	killAll()
+	killAll(true)
 })
 
 process.on('beforeExit', () => {
@@ -300,7 +300,7 @@ function killAll(fail) {
 		const pids = procs.map(o => o.pid)
 		killByPids(...pids)
 		printRunStates()
-		if (fail) {
+		if (fail || runStates.some(o => o.status === 'ERROR')) {
 			process.exit(1)
 		}
 	}, 2000)

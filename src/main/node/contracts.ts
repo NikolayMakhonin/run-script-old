@@ -1,4 +1,5 @@
 import {ChildProcess} from 'child_process'
+import colors from 'kleur'
 import {Stream} from 'stream'
 
 export interface ProcessEnv {
@@ -35,3 +36,9 @@ export interface IGlobalConfig {
 }
 
 export const GLOBAL_CONFIG_ENV = 'RUN_SCRIPT_CONFIG_n20fy652y5n'
+
+export enum RunStatus {
+	ERROR = 'ERROR',
+	RUNNED = 'RUNNED',
+	SUCCESS = 'SUCCESS',
+}
