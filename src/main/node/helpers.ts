@@ -209,19 +209,19 @@ const runStates = []
 
 process.on('SIGTERM', () => {
 	console.log('SIGTERM')
-	killAll()
+	killAll(true)
 })
 process.on('SIGHUP', () => {
 	console.log('SIGHUP')
-	killAll()
+	killAll(true)
 })
 process.on('SIGINT', () => {
 	console.log('SIGINT')
-	killAll()
+	killAll(true)
 })
 process.on('SIGBREAK', () => {
 	console.log('SIGBREAK')
-	killAll()
+	killAll(true)
 })
 
 process.on('beforeExit', () => {
@@ -481,6 +481,8 @@ export function run(command, {
 		return null
 	})
 }
+
+export const runOnce: typeof run = singleCall(run)
 
 // eslint-disable-next-line no-extend-native
 ;(Promise.prototype as any).stopOnError = function stopOnError() {

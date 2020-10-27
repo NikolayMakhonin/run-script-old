@@ -20,11 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d52e1996-07d3-4492-b0b2-6fba29f4b076" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/HISTORY.md" beforeDir="false" afterPath="$PROJECT_DIR$/HISTORY.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/node/globalConfig.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/node/globalConfig.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/node/run.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/node/run.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/tests/node/main/run.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/tests/node/main/run.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/node/helpers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/node/helpers.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -223,13 +220,6 @@
     <configuration />
   </component>
   <component name="TaskManager">
-    <task id="LOCAL-00011" summary="Fix travis">
-      <created>1590651425166</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1590651425166</updated>
-    </task>
     <task id="LOCAL-00012" summary="Fix travis">
       <created>1590651486524</created>
       <option name="number" value="00012" />
@@ -408,7 +398,7 @@
       <workItem from="1601798784029" duration="33000" />
       <workItem from="1603712771658" duration="2307000" />
       <workItem from="1603715088908" duration="9104000" />
-      <workItem from="1603724938379" duration="13486000" />
+      <workItem from="1603724938379" duration="16829000" />
     </task>
     <task id="LOCAL-00036" summary="Fix travis">
       <created>1590675855678</created>
@@ -578,7 +568,14 @@
       <option name="project" value="LOCAL" />
       <updated>1603773273440</updated>
     </task>
-    <option name="localTasksCounter" value="60" />
+    <task id="LOCAL-00060" summary="Fix globalConfig loader">
+      <created>1603773671803</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1603773671803</updated>
+    </task>
+    <option name="localTasksCounter" value="61" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -675,10 +672,10 @@
       <screen x="0" y="0" width="1920" height="882" />
     </state>
     <state x="409" y="84" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.882@0.0.1920.882" timestamp="1603725774448" />
-    <state x="484" y="0" key="CommitChangelistDialog2" timestamp="1603773272124">
+    <state x="484" y="0" key="CommitChangelistDialog2" timestamp="1603773671237">
       <screen x="0" y="0" width="1920" height="882" />
     </state>
-    <state x="484" y="0" key="CommitChangelistDialog2/0.0.1920.882@0.0.1920.882" timestamp="1603773272124" />
+    <state x="484" y="0" key="CommitChangelistDialog2/0.0.1920.882@0.0.1920.882" timestamp="1603773671237" />
     <state width="845" height="574" key="DebuggerActiveHint" timestamp="1603724550208">
       <screen x="0" y="0" width="1920" height="882" />
     </state>
@@ -759,10 +756,10 @@
       <screen x="0" y="0" width="1920" height="882" />
     </state>
     <state x="343" y="0" key="SettingsEditor/0.0.1920.882@0.0.1920.882" timestamp="1603717377482" />
-    <state x="-1" y="0" width="1921" height="880" key="find.popup" timestamp="1603733424112">
+    <state x="-1" y="0" width="1921" height="880" key="find.popup" timestamp="1603782284772">
       <screen x="0" y="0" width="1920" height="882" />
     </state>
-    <state x="-1" y="0" width="1921" height="880" key="find.popup/0.0.1920.882@0.0.1920.882" timestamp="1603733424112" />
+    <state x="-1" y="0" width="1921" height="880" key="find.popup/0.0.1920.882@0.0.1920.882" timestamp="1603782284772" />
     <state x="539" y="-1" key="search.everywhere.popup" timestamp="1603712829750">
       <screen x="0" y="0" width="1920" height="882" />
     </state>
@@ -773,7 +770,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/main/node/helpers.ts</url>
-          <line>457</line>
+          <line>461</line>
           <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
