@@ -353,7 +353,7 @@ function killAll(isFailure?: boolean) {
 		if (isFailure || runStates.some(o => o.status === RunStatus.ERROR)) {
 			process.exit(1)
 		}
-	}, 2000)
+	}, 100)
 }
 
 export function run(command, {
