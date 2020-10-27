@@ -343,6 +343,8 @@ function killAll(isFailure?: boolean) {
 	}
 	wasKillAll = true
 
+	console.log('Terminaring...')
+
 	setTimeout(() => {
 		const procs = processList.filter(o => o.pid && !o.killed)
 		const pids = procs.map(o => o.pid)
