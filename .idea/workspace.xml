@@ -19,15 +19,8 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d52e1996-07d3-4492-b0b2-6fba29f4b076" name="Default Changelist" comment="Fix process kill">
+    <list default="true" id="d52e1996-07d3-4492-b0b2-6fba29f4b076" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HISTORY.md" beforeDir="false" afterPath="$PROJECT_DIR$/HISTORY.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/env/scripts/helpers/helpers.js" beforeDir="false" afterPath="$PROJECT_DIR$/env/scripts/helpers/helpers.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/env/scripts/run.js" beforeDir="false" afterPath="$PROJECT_DIR$/env/scripts/run.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/node/contracts.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/node/contracts.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/node/helpers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/node/helpers.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/tests/node/main/helpers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/tests/node/main/helpers.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -201,13 +194,6 @@
     <configuration />
   </component>
   <component name="TaskManager">
-    <task id="LOCAL-00014" summary="Fix travis">
-      <created>1590653705394</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1590653705394</updated>
-    </task>
     <task id="LOCAL-00015" summary="Fix travis">
       <created>1590653837657</created>
       <option name="number" value="00015" />
@@ -365,7 +351,7 @@
       <workItem from="1601798784029" duration="33000" />
       <workItem from="1603712771658" duration="2307000" />
       <workItem from="1603715088908" duration="9104000" />
-      <workItem from="1603724938379" duration="19105000" />
+      <workItem from="1603724938379" duration="20331000" />
     </task>
     <task id="LOCAL-00036" summary="Fix travis">
       <created>1590675855678</created>
@@ -556,7 +542,14 @@
       <option name="project" value="LOCAL" />
       <updated>1603783610944</updated>
     </task>
-    <option name="localTasksCounter" value="63" />
+    <task id="LOCAL-00063" summary="Fix process kill">
+      <created>1603785313710</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1603785313710</updated>
+    </task>
+    <option name="localTasksCounter" value="64" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -653,18 +646,18 @@
       <screen x="0" y="0" width="1920" height="882" />
     </state>
     <state x="409" y="84" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.882@0.0.1920.882" timestamp="1603785283822" />
-    <state x="-2" y="0" width="1922" height="882" key="CommitChangelistDialog2" timestamp="1603785146213">
+    <state x="-2" y="0" width="1922" height="882" key="CommitChangelistDialog2" timestamp="1603785313122">
       <screen x="0" y="0" width="1920" height="882" />
     </state>
-    <state x="-2" y="0" width="1922" height="882" key="CommitChangelistDialog2/0.0.1920.882@0.0.1920.882" timestamp="1603785146213" />
+    <state x="-2" y="0" width="1922" height="882" key="CommitChangelistDialog2/0.0.1920.882@0.0.1920.882" timestamp="1603785313122" />
     <state width="845" height="574" key="DebuggerActiveHint" timestamp="1603784961617">
       <screen x="0" y="0" width="1920" height="882" />
     </state>
     <state width="845" height="574" key="DebuggerActiveHint/0.0.1920.882@0.0.1920.882" timestamp="1603784961617" />
-    <state x="183" y="66" key="DiffContextDialog" timestamp="1603785145652">
+    <state x="183" y="66" key="DiffContextDialog" timestamp="1603785308283">
       <screen x="0" y="0" width="1920" height="882" />
     </state>
-    <state x="183" y="66" key="DiffContextDialog/0.0.1920.882@0.0.1920.882" timestamp="1603785145652" />
+    <state x="183" y="66" key="DiffContextDialog/0.0.1920.882@0.0.1920.882" timestamp="1603785308283" />
     <state x="686" y="134" key="FileChooserDialogImpl" timestamp="1603734049824">
       <screen x="0" y="0" width="1920" height="882" />
     </state>

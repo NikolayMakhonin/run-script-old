@@ -465,7 +465,10 @@ export function run(command, {
 						_reject(line)
 						return
 					}
-					process.stdout.write(`${line}\r\n`)
+					if (logFilter(line)) {
+						line = correctLog(line)
+						process.stdout.write(`${line}\r\n`)
+					}
 				} catch (ex) {
 					_reject(ex)
 				}
