@@ -56,8 +56,8 @@ const errorColorRegExp = createColorRegexp([
 ])
 
 function stdOutSearchError(text: string) {
-	return getGlobalConfig().stdOutIsError
-		? getGlobalConfig().stdOutIsError(text, _stdOutSearchError)
+	return getGlobalConfig().stdOutSearchError
+		? getGlobalConfig().stdOutSearchError(text, _stdOutSearchError)
 		: _stdOutSearchError(text)
 }
 

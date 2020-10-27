@@ -31,7 +31,7 @@ export interface IRunOptions {
 
 export interface IGlobalConfig {
 	logFilter?: TextPredicate,
-	stdOutIsError?: ErrorSearch,
+	stdOutSearchError?: ErrorSearch,
 	stdErrIsError?: TextPredicate,
 }
 

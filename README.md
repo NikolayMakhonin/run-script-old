@@ -70,7 +70,7 @@ type ErrorSearch = (text: string, next: ErrorSearch) => string | void | null | f
 
 type IGlobalConfig = {
 	logFilter?: TextPredicate,
-	stdOutIsError?: ErrorSearch,
+	stdOutSearchError?: ErrorSearch,
 	stdErrIsError?: TextPredicate,
 }
 ```
