@@ -14,16 +14,22 @@ export function setGlobalConfig(config: IGlobalConfig) {
 
 // region load config
 
-const configFile = path.resolve(process.cwd(), process.env[GLOBAL_CONFIG_ENV] || '.run-script-rc.js')
+let globalConfigLoaded = false
 
-if (fs.existsSync(configFile)) {
-	const config = require(configFile)
-	setGlobalConfig({
-		...getGlobalConfig(),
-		...config,
-	})
-} else if (process.env[GLOBAL_CONFIG_ENV]) {
-	throw new Error('Config file not found: ' + configFile)
+if (!globalConfigLoaded) {
+	globalConfigLoaded = true
+
+	const configFile = path.resolve(process.cwd(), process.env[GLOBAL_CONFIG_ENV] || '.run-script-rc.js')
+
+	if (fs.existsSync(configFile)) {
+		const config = require(configFile)
+		setGlobalConfig({
+			...getGlobalConfig(),
+			...config,
+		})
+	} else if (process.env[GLOBAL_CONFIG_ENV]) {
+		throw new Error('Config file not found: ' + configFile)
+	}
 }
 
 // endregion
