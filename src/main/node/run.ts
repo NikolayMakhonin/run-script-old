@@ -4,6 +4,8 @@ import {GLOBAL_CONFIG_ENV} from './contracts'
 /* eslint-disable global-require */
 import {run} from './helpers'
 import yargs from 'yargs'
+// @ts-ignore
+import pkg from '~/package.json'
 
 const argv = yargs(process.argv)
 	.option('config', {
@@ -18,7 +20,7 @@ const script = argv._[argv._.length - 1]
 module.exports = (async () => {
 	try {
 		await run(
-			`node -e "${script.replace(/"/g, '""')}"`,
+			`node -e "require('${pkg.name}'); ${script.replace(/"/g, '""')}"`,
 			{
 				notAutoKill: true,
 				stdio      : 'inherit',
