@@ -6,6 +6,7 @@ import {IGlobalConfig, GLOBAL_CONFIG_ENV} from './contracts'
 let globalConfig: IGlobalConfig = {}
 
 export function getGlobalConfig(): IGlobalConfig {
+	loadGlobalConfig()
 	return globalConfig
 }
 export function setGlobalConfig(config: IGlobalConfig) {
@@ -16,7 +17,10 @@ export function setGlobalConfig(config: IGlobalConfig) {
 
 let globalConfigLoaded = false
 
-if (!globalConfigLoaded) {
+function loadGlobalConfig() {
+	if (globalConfigLoaded) {
+		return
+	}
 	globalConfigLoaded = true
 
 	const configFile = path.resolve(process.cwd(), process.env[GLOBAL_CONFIG_ENV] || '.run-script-rc.js')
