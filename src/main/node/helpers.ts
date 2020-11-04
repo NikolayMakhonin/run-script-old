@@ -360,6 +360,12 @@ function killAll(isFailure?: boolean) {
 // Buffer class
 type BufferEncoding = 'ascii' | 'utf8' | 'utf-8' | 'utf16le' | 'ucs2' | 'ucs-2' | 'base64' | 'latin1' | 'binary' | 'hex';
 
+interface IRunResult {
+	out: string
+	err: string
+	both: string
+}
+
 export function run(command, {
 	env,
 	cwd,
@@ -368,8 +374,10 @@ export function run(command, {
 	stdin,
 	shell = true,
 	prepareProcess,
-}: IRunOptions = {}): Promise<string> {
-	return new Promise<string>((resolve, reject) => {
+	dontSearchErrors,
+	dontShowOutputs,
+}: IRunOptions = {}): Promise<IRunResult> {
+	return new Promise<IRunResult>((resolve, reject) => {
 		if (wasKillAll) {
 			reject('Was kill all')
 			return
@@ -385,10 +393,18 @@ export function run(command, {
 		}
 		runStates.push(runState)
 
-		const _resolve = (value) => {
+		let stdoutString: string = void 0
+		let stderrString: string = void 0
+		let stdbothString: string = void 0
+
+		const _resolve = () => {
 			runState.status = RunStatus.SUCCESS
 			runState.timeEnd = Date.now()
-			resolve(value)
+			resolve({
+				out : stdoutString,
+				err : stderrString,
+				both: stdbothString,
+			})
 		}
 
 		const _reject = err => {
@@ -410,12 +426,26 @@ export function run(command, {
 				shell,
 			})
 
-		let stdoutString = void 0
 		if (proc.stdout) {
 			stdoutString = ''
+			stdbothString = ''
 			proc.stdout.pipe(new Writable({
 				write(chunk: Buffer, encoding: BufferEncoding | 'buffer', callback: (error?: (Error | null)) => void) {
-					stdoutString += chunk.toString(encoding === 'buffer' ? void 0 : encoding)
+					const str = chunk.toString(encoding === 'buffer' ? void 0 : encoding)
+					stdoutString += str
+					stdbothString += str
+				},
+			}))
+		}
+
+		if (proc.stderr) {
+			stderrString = ''
+			stdbothString = ''
+			proc.stderr.pipe(new Writable({
+				write(chunk: Buffer, encoding: BufferEncoding | 'buffer', callback: (error?: (Error | null)) => void) {
+					const str = chunk.toString(encoding === 'buffer' ? void 0 : encoding)
+					stderrString += str
+					stdbothString += str
 				},
 			}))
 		}
@@ -429,17 +459,17 @@ export function run(command, {
 				_reject('process.disconnect')
 			})
 			.on('close', (code, signal) => {
-				if (code) {
+				if (!dontSearchErrors && code) {
 					_reject(`process.close(code=${code}, signal=${signal})`)
 				} else {
-					_resolve(stdoutString)
+					_resolve()
 				}
 			})
 			.on('exit', (code, signal) => {
-				if (code) {
+				if (!dontSearchErrors && code) {
 					_reject(`process.exit(code=${code}, signal=${signal})`)
 				} else {
-					_resolve(stdoutString)
+					_resolve()
 				}
 			})
 			.on('message', (message) => {
@@ -456,11 +486,11 @@ export function run(command, {
 			}).on('line', line => {
 				try {
 					const error = stdOutSearchError(line)
-					if (logFilter(line)) {
+					if (!dontShowOutputs && logFilter(line)) {
 						line = correctLog(line)
 						process.stdout.write(`${line}\r\n`)
 					}
-					if (error) {
+					if (!dontSearchErrors && error) {
 						_reject(`ERROR DETECTED: ${error}`)
 					}
 				} catch (ex) {
@@ -475,12 +505,12 @@ export function run(command, {
 				terminal: false,
 			}).on('line', line => {
 				try {
-					if (stdErrIsError(line)) {
+					if (!dontSearchErrors && stdErrIsError(line)) {
 						process.stdout.write(`STDERR: ${line}\r\n`)
 						_reject(line)
 						return
 					}
-					if (logFilter(line)) {
+					if (!dontShowOutputs && logFilter(line)) {
 						line = correctLog(line)
 						process.stdout.write(`${line}\r\n`)
 					}

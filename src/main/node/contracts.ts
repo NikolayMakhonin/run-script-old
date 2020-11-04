@@ -28,6 +28,8 @@ export interface IRunOptions {
 	stdin?: undefined | null | 'pipe' | 'ipc' | 'ignore' | 'inherit' | Stream,
 	shell?: boolean,
 	prepareProcess?: (proc: ChildProcess) => void,
+	dontSearchErrors?: boolean,
+	dontShowOutputs?: boolean,
 }
 
 export interface IGlobalConfig {

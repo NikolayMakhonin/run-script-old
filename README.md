@@ -33,7 +33,7 @@ const {run, singleCall, singleProcess} = require('../helpers/helpers')
 // singleCall - Create function that skip all executions except first
 const buildMjs = singleCall(() => {
     // run - execute command line
-	await run(`babel src -x .js -x .ts`, {
+	const {out, err, both} = await run(`babel src -x .js -x .ts`, {
         // see: IRunOptions
     })
 })
@@ -55,6 +55,8 @@ export interface IRunOptions {
 	stdin?: undefined | null | 'pipe' | 'ipc' | 'ignore' | 'inherit' | Stream,
 	shell?: boolean,
 	prepareProcess?: (proc: ChildProcess) => void,
+	dontSearchErrors?: boolean,
+	dontShowOutputs?: boolean,
 }
 ```
 

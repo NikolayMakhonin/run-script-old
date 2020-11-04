@@ -17,7 +17,9 @@ describe('node > helpers', function () {
 				proc.stdout.pipe(stdout)
 			},
 		})
-		assert.strictEqual(result.trim(), '123')
+		assert.strictEqual(result.out.trim(), '123')
+		assert.strictEqual(result.both.trim(), '123')
+		assert.strictEqual(result.err.trim(), '')
 		assert.strictEqual(log.trim(), '123')
 	})
 })
