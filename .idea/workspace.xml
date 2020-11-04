@@ -20,7 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d52e1996-07d3-4492-b0b2-6fba29f4b076" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/node/helpers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/node/helpers.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -194,20 +194,6 @@
     <configuration />
   </component>
   <component name="TaskManager">
-    <task id="LOCAL-00021" summary="Fix travis">
-      <created>1590664179400</created>
-      <option name="number" value="00021" />
-      <option name="presentableId" value="LOCAL-00021" />
-      <option name="project" value="LOCAL" />
-      <updated>1590664179400</updated>
-    </task>
-    <task id="LOCAL-00022" summary="Fix travis">
-      <created>1590665321539</created>
-      <option name="number" value="00022" />
-      <option name="presentableId" value="LOCAL-00022" />
-      <option name="project" value="LOCAL" />
-      <updated>1590665321539</updated>
-    </task>
     <task id="LOCAL-00023" summary="Fix travis">
       <created>1590665478023</created>
       <option name="number" value="00023" />
@@ -314,7 +300,7 @@
       <workItem from="1603819676159" duration="879000" />
       <workItem from="1603821859725" duration="2760000" />
       <workItem from="1604130288843" duration="684000" />
-      <workItem from="1604501289458" duration="2772000" />
+      <workItem from="1604501289458" duration="3594000" />
     </task>
     <task id="LOCAL-00036" summary="Fix travis">
       <created>1590675855678</created>
@@ -554,7 +540,21 @@
       <option name="project" value="LOCAL" />
       <updated>1604503989491</updated>
     </task>
-    <option name="localTasksCounter" value="70" />
+    <task id="LOCAL-00070" summary="v0.2.0 - Changed run() interface">
+      <created>1604504101066</created>
+      <option name="number" value="00070" />
+      <option name="presentableId" value="LOCAL-00070" />
+      <option name="project" value="LOCAL" />
+      <updated>1604504101067</updated>
+    </task>
+    <task id="LOCAL-00071" summary="v0.2.1 - Changed run() interface">
+      <created>1604504280107</created>
+      <option name="number" value="00071" />
+      <option name="presentableId" value="LOCAL-00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1604504280107</updated>
+    </task>
+    <option name="localTasksCounter" value="72" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -615,7 +615,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="TODO changed" />
     <MESSAGE value="Remove pug" />
     <MESSAGE value="Fix package.json" />
     <MESSAGE value="Delete browser specific code" />
@@ -640,7 +639,8 @@
     <MESSAGE value="v0.1.1 - Changed delay before kill processes to 100 ms" />
     <MESSAGE value="v0.1.2 - fix custom stdOutSearchError" />
     <MESSAGE value="v0.2.0 - Changed run() interface" />
-    <option name="LAST_COMMIT_MESSAGE" value="v0.2.0 - Changed run() interface" />
+    <MESSAGE value="v0.2.1 - Changed run() interface" />
+    <option name="LAST_COMMIT_MESSAGE" value="v0.2.1 - Changed run() interface" />
   </component>
   <component name="WindowStateProjectService">
     <state x="552" y="24" key="#Watch" timestamp="1603713334805">
@@ -651,18 +651,18 @@
       <screen x="0" y="0" width="1920" height="882" />
     </state>
     <state x="409" y="84" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.882@0.0.1920.882" timestamp="1603785283822" />
-    <state x="-2" y="0" width="1922" height="882" key="CommitChangelistDialog2" timestamp="1604503988944">
+    <state x="-2" y="0" width="1922" height="882" key="CommitChangelistDialog2" timestamp="1604504279572">
       <screen x="0" y="0" width="1920" height="882" />
     </state>
-    <state x="-2" y="0" width="1922" height="882" key="CommitChangelistDialog2/0.0.1920.882@0.0.1920.882" timestamp="1604503988944" />
+    <state x="-2" y="0" width="1922" height="882" key="CommitChangelistDialog2/0.0.1920.882@0.0.1920.882" timestamp="1604504279572" />
     <state width="845" height="574" key="DebuggerActiveHint" timestamp="1603784961617">
       <screen x="0" y="0" width="1920" height="882" />
     </state>
     <state width="845" height="574" key="DebuggerActiveHint/0.0.1920.882@0.0.1920.882" timestamp="1603784961617" />
-    <state x="3" y="3" width="1912" height="874" key="DiffContextDialog" timestamp="1604503981276">
+    <state x="3" y="3" width="1912" height="874" key="DiffContextDialog" timestamp="1604504273908">
       <screen x="0" y="0" width="1920" height="882" />
     </state>
-    <state x="3" y="3" width="1912" height="874" key="DiffContextDialog/0.0.1920.882@0.0.1920.882" timestamp="1604503981276" />
+    <state x="3" y="3" width="1912" height="874" key="DiffContextDialog/0.0.1920.882@0.0.1920.882" timestamp="1604504273908" />
     <state x="686" y="134" key="FileChooserDialogImpl" timestamp="1603734049824">
       <screen x="0" y="0" width="1920" height="882" />
     </state>
