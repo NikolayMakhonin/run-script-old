@@ -376,6 +376,7 @@ export function run(command, {
 	prepareProcess,
 	dontSearchErrors,
 	dontShowOutputs,
+	returnOutputs,
 }: IRunOptions = {}): Promise<IRunResult> {
 	return new Promise<IRunResult>((resolve, reject) => {
 		if (wasKillAll) {
@@ -400,11 +401,15 @@ export function run(command, {
 		const _resolve = () => {
 			runState.status = RunStatus.SUCCESS
 			runState.timeEnd = Date.now()
-			resolve({
-				out : stdoutString,
-				err : stderrString,
-				both: stdbothString,
-			})
+			resolve(
+				returnOutputs
+					? {
+						out : stdoutString,
+						err : stderrString,
+						both: stdbothString,
+					}
+					: void 0,
+			)
 		}
 
 		const _reject = err => {
@@ -426,28 +431,30 @@ export function run(command, {
 				shell,
 			})
 
-		if (proc.stdout) {
-			stdoutString = ''
-			stdbothString = ''
-			proc.stdout.pipe(new Writable({
-				write(chunk: Buffer, encoding: BufferEncoding | 'buffer', callback: (error?: (Error | null)) => void) {
-					const str = chunk.toString(encoding === 'buffer' ? void 0 : encoding)
-					stdoutString += str
-					stdbothString += str
-				},
-			}))
-		}
+		if (returnOutputs) {
+			if (proc.stdout) {
+				stdoutString = ''
+				stdbothString = ''
+				proc.stdout.pipe(new Writable({
+					write(chunk: Buffer, encoding: BufferEncoding | 'buffer', callback: (error?: (Error | null)) => void) {
+						const str = chunk.toString(encoding === 'buffer' ? void 0 : encoding)
+						stdoutString += str
+						stdbothString += str
+					},
+				}))
+			}
 
-		if (proc.stderr) {
-			stderrString = ''
-			stdbothString = ''
-			proc.stderr.pipe(new Writable({
-				write(chunk: Buffer, encoding: BufferEncoding | 'buffer', callback: (error?: (Error | null)) => void) {
-					const str = chunk.toString(encoding === 'buffer' ? void 0 : encoding)
-					stderrString += str
-					stdbothString += str
-				},
-			}))
+			if (proc.stderr) {
+				stderrString = ''
+				stdbothString = ''
+				proc.stderr.pipe(new Writable({
+					write(chunk: Buffer, encoding: BufferEncoding | 'buffer', callback: (error?: (Error | null)) => void) {
+						const str = chunk.toString(encoding === 'buffer' ? void 0 : encoding)
+						stderrString += str
+						stdbothString += str
+					},
+				}))
+			}
 		}
 
 		if (!notAutoKill) {

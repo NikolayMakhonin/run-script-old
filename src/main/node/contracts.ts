@@ -30,6 +30,7 @@ export interface IRunOptions {
 	prepareProcess?: (proc: ChildProcess) => void,
 	dontSearchErrors?: boolean,
 	dontShowOutputs?: boolean,
+	returnOutputs?: boolean,
 }
 
 export interface IGlobalConfig {

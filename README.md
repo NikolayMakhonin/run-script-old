@@ -35,6 +35,7 @@ const buildMjs = singleCall(() => {
     // run - execute command line
 	const {out, err, both} = await run(`babel src -x .js -x .ts`, {
         // see: IRunOptions
+        returnOutputs: true,
     })
 })
 
@@ -57,6 +58,7 @@ export interface IRunOptions {
 	prepareProcess?: (proc: ChildProcess) => void,
 	dontSearchErrors?: boolean,
 	dontShowOutputs?: boolean,
+    returnOutputs?: boolean,
 }
 ```
 
