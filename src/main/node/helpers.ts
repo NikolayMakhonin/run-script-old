@@ -406,7 +406,7 @@ export function run(command, {
 					...env,
 				},
 				timeout,
-				stdio: stdin,
+				stdio: [stdin, stdin, stdin],
 				shell,
 			})
 
