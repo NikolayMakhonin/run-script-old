@@ -51,7 +51,7 @@ export interface IRunOptions {
 	env?: ProcessEnv,
 	timeout?: number,
 	notAutoKill?: boolean, // don't auto kill all process tree after error
-	stdio?: TStdIO,
+	stdin?: undefined | null | 'pipe' | 'ipc' | 'ignore' | 'inherit' | Stream,
 	shell?: boolean,
 	prepareProcess?: (proc: ChildProcess) => void,
 }

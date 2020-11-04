@@ -21,7 +21,7 @@ module.exports = (async () => {
 			`node -e "${script.replace(/"/g, '""')}"`,
 			{
 				notAutoKill: true,
-				stdio      : 'inherit',
+				stdin      : 'inherit',
 				env        : {
 					[GLOBAL_CONFIG_ENV]: argv.config || void 0,
 				},
