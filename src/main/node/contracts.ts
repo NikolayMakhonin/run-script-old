@@ -22,6 +22,7 @@ export type ErrorSearch = (text: string, next: ErrorSearch) => string | void | n
 
 export interface IRunOptions {
 	env?: ProcessEnv,
+	cwd? : string,
 	timeout?: number,
 	notAutoKill?: boolean,
 	stdin?: undefined | null | 'pipe' | 'ipc' | 'ignore' | 'inherit' | Stream,

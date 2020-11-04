@@ -49,6 +49,7 @@ const build = singleProcess(async appConfigType => {
 
 export interface IRunOptions {
 	env?: ProcessEnv,
+	cwd? : string,
 	timeout?: number,
 	notAutoKill?: boolean, // don't auto kill all process tree after error
 	stdin?: undefined | null | 'pipe' | 'ipc' | 'ignore' | 'inherit' | Stream,

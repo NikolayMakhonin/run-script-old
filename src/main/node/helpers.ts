@@ -362,6 +362,7 @@ type BufferEncoding = 'ascii' | 'utf8' | 'utf-8' | 'utf16le' | 'ucs2' | 'ucs-2' 
 
 export function run(command, {
 	env,
+	cwd,
 	timeout,
 	notAutoKill,
 	stdin,
@@ -399,7 +400,7 @@ export function run(command, {
 		const proc = spawn(
 			command,
 			{
-				cwd: process.cwd(),
+				cwd: cwd || process.cwd(),
 				env: {
 					...process.env,
 					...env,
