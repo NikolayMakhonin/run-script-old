@@ -24,7 +24,7 @@ export interface IRunOptions {
 	env?: ProcessEnv,
 	timeout?: number,
 	notAutoKill?: boolean,
-	stdio?: TStdIO,
+	stdin?: undefined | null | 'pipe' | 'ipc' | 'ignore' | 'inherit' | Stream,
 	shell?: boolean,
 	prepareProcess?: (proc: ChildProcess) => void,
 }

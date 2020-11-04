@@ -21,6 +21,10 @@
   <component name="ChangeListManager">
     <list default="true" id="d52e1996-07d3-4492-b0b2-6fba29f4b076" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/node/.eslintrc" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/node/.eslintrc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/node/contracts.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/node/contracts.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/node/helpers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/node/helpers.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/tests/node/main/helpers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/tests/node/main/helpers.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -194,13 +198,6 @@
     <configuration />
   </component>
   <component name="TaskManager">
-    <task id="LOCAL-00018" summary="Fix travis">
-      <created>1590661448807</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1590661448807</updated>
-    </task>
     <task id="LOCAL-00019" summary="Fix travis">
       <created>1590662608670</created>
       <option name="number" value="00019" />
@@ -333,7 +330,9 @@
       <workItem from="1603724938379" duration="21179000" />
       <workItem from="1603818451200" duration="341000" />
       <workItem from="1603819676159" duration="879000" />
-      <workItem from="1603821859725" duration="1439000" />
+      <workItem from="1603821859725" duration="2760000" />
+      <workItem from="1604130288843" duration="684000" />
+      <workItem from="1604501289458" duration="2402000" />
     </task>
     <task id="LOCAL-00036" summary="Fix travis">
       <created>1590675855678</created>
@@ -552,7 +551,14 @@
       <option name="project" value="LOCAL" />
       <updated>1603819831022</updated>
     </task>
-    <option name="localTasksCounter" value="67" />
+    <task id="LOCAL-00067" summary="v0.1.2 - fix custom stdOutSearchError">
+      <created>1603824050300</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1603824050300</updated>
+    </task>
+    <option name="localTasksCounter" value="68" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -613,7 +619,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="fix ReadMe" />
     <MESSAGE value="Merged with app" />
     <MESSAGE value="TODO changed" />
     <MESSAGE value="Remove pug" />
@@ -638,7 +643,8 @@
     <MESSAGE value="Fix logFilter" />
     <MESSAGE value="v0.1.0 - Changed delay before kill processes to 100 ms" />
     <MESSAGE value="v0.1.1 - Changed delay before kill processes to 100 ms" />
-    <option name="LAST_COMMIT_MESSAGE" value="v0.1.1 - Changed delay before kill processes to 100 ms" />
+    <MESSAGE value="v0.1.2 - fix custom stdOutSearchError" />
+    <option name="LAST_COMMIT_MESSAGE" value="v0.1.2 - fix custom stdOutSearchError" />
   </component>
   <component name="WindowStateProjectService">
     <state x="552" y="24" key="#Watch" timestamp="1603713334805">
@@ -649,10 +655,10 @@
       <screen x="0" y="0" width="1920" height="882" />
     </state>
     <state x="409" y="84" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.882@0.0.1920.882" timestamp="1603785283822" />
-    <state x="-2" y="0" width="1922" height="882" key="CommitChangelistDialog2" timestamp="1603819830379">
+    <state x="-2" y="0" width="1922" height="882" key="CommitChangelistDialog2" timestamp="1603824049377">
       <screen x="0" y="0" width="1920" height="882" />
     </state>
-    <state x="-2" y="0" width="1922" height="882" key="CommitChangelistDialog2/0.0.1920.882@0.0.1920.882" timestamp="1603819830379" />
+    <state x="-2" y="0" width="1922" height="882" key="CommitChangelistDialog2/0.0.1920.882@0.0.1920.882" timestamp="1603824049377" />
     <state width="845" height="574" key="DebuggerActiveHint" timestamp="1603784961617">
       <screen x="0" y="0" width="1920" height="882" />
     </state>
@@ -737,10 +743,10 @@
       <screen x="0" y="0" width="1920" height="882" />
     </state>
     <state x="451" y="106" key="Vcs.Push.Dialog.v2/0.0.1920.882@0.0.1920.882" timestamp="1603820519114" />
-    <state x="-1" y="0" width="1921" height="880" key="find.popup" timestamp="1603823962547">
+    <state x="-1" y="0" width="1921" height="880" key="find.popup" timestamp="1603823996362">
       <screen x="0" y="0" width="1920" height="882" />
     </state>
-    <state x="-1" y="0" width="1921" height="880" key="find.popup/0.0.1920.882@0.0.1920.882" timestamp="1603823962547" />
+    <state x="-1" y="0" width="1921" height="880" key="find.popup/0.0.1920.882@0.0.1920.882" timestamp="1603823996362" />
     <state x="539" y="-1" key="search.everywhere.popup" timestamp="1603712829750">
       <screen x="0" y="0" width="1920" height="882" />
     </state>

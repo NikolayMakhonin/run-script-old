@@ -12,12 +12,12 @@ describe('node > helpers', function () {
 				log += chunk.toString(encoding === 'buffer' ? void 0 : encoding)
 			},
 		})
-		await run('echo 123', {
-			stdio: [null, 'pipe', 'inherit'],
+		const result = await run('echo 123', {
 			prepareProcess(proc) {
 				proc.stdout.pipe(stdout)
 			},
 		})
+		assert.strictEqual(result.trim(), '123')
 		assert.strictEqual(log.trim(), '123')
 	})
 })

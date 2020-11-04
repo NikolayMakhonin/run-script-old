@@ -5,6 +5,7 @@ import colors from 'kleur'
 // import spawn from 'spawn-command-with-kill'
 import psTree from 'ps-tree'
 import readline from 'readline'
+import {Writable} from 'stream'
 import {IRunOptions, RunStatus} from './contracts'
 import {getGlobalConfig} from './globalConfig'
 // import kill from 'tree-kill'
@@ -360,11 +361,11 @@ export function run(command, {
 	env,
 	timeout,
 	notAutoKill,
-	stdio,
+	stdin,
 	shell = true,
 	prepareProcess,
-}: IRunOptions = {}): Promise<void> {
-	return new Promise<void>((resolve, reject) => {
+}: IRunOptions = {}): Promise<string> {
+	return new Promise<string>((resolve, reject) => {
 		if (wasKillAll) {
 			reject('Was kill all')
 			return
@@ -380,10 +381,10 @@ export function run(command, {
 		}
 		runStates.push(runState)
 
-		const _resolve = () => {
+		const _resolve = (value) => {
 			runState.status = RunStatus.SUCCESS
 			runState.timeEnd = Date.now()
-			resolve()
+			resolve(value)
 		}
 
 		const _reject = err => {
@@ -401,9 +402,16 @@ export function run(command, {
 					...env,
 				},
 				timeout,
-				stdio,
+				stdio: [stdin, 'pipe', 'pipe'],
 				shell,
 			})
+
+		let stdoutString = ''
+		proc.stdout.pipe(new Writable({
+			write(chunk: Buffer, encoding: BufferEncoding | 'buffer', callback: (error?: (Error | null)) => void) {
+				stdoutString += chunk.toString(encoding === 'buffer' ? void 0 : encoding)
+			},
+		}))
 
 		if (!notAutoKill) {
 			addProcess(proc)
@@ -417,14 +425,14 @@ export function run(command, {
 				if (code) {
 					_reject(`process.close(code=${code}, signal=${signal})`)
 				} else {
-					_resolve()
+					_resolve(stdoutString)
 				}
 			})
 			.on('exit', (code, signal) => {
 				if (code) {
 					_reject(`process.exit(code=${code}, signal=${signal})`)
 				} else {
-					_resolve()
+					_resolve(stdoutString)
 				}
 			})
 			.on('message', (message) => {
