@@ -406,16 +406,19 @@ export function run(command, {
 					...env,
 				},
 				timeout,
-				stdio: [stdin, null, null],
+				stdio: stdin,
 				shell,
 			})
 
-		let stdoutString = ''
-		proc.stdout.pipe(new Writable({
-			write(chunk: Buffer, encoding: BufferEncoding | 'buffer', callback: (error?: (Error | null)) => void) {
-				stdoutString += chunk.toString(encoding === 'buffer' ? void 0 : encoding)
-			},
-		}))
+		let stdoutString = void 0
+		if (proc.stdout) {
+			stdoutString = ''
+			proc.stdout.pipe(new Writable({
+				write(chunk: Buffer, encoding: BufferEncoding | 'buffer', callback: (error?: (Error | null)) => void) {
+					stdoutString += chunk.toString(encoding === 'buffer' ? void 0 : encoding)
+				},
+			}))
+		}
 
 		if (!notAutoKill) {
 			addProcess(proc)
