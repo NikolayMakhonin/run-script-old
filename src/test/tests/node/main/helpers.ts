@@ -13,6 +13,7 @@ describe('node > helpers', function () {
 			},
 		})
 		const result = await run('echo 123', {
+			returnOutputs: true,
 			prepareProcess(proc) {
 				proc.stdout.pipe(stdout)
 			},
