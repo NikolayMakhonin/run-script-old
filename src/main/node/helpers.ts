@@ -8,6 +8,7 @@ import readline from 'readline'
 import {Writable} from 'stream'
 import {IRunOptions, RunStatus} from './contracts'
 import {getGlobalConfig} from './globalConfig'
+import path from 'path'
 // import kill from 'tree-kill'
 
 // region helpers
@@ -246,7 +247,7 @@ function printRunStates() {
 
 		const message = `${state.status} (${
 			((state.timeEnd || Date.now()) - state.timeStart) / 1000
-		} sec): ${state.command}`
+		} sec): ${state.description}`
 
 		switch (state.status) {
 			case RunStatus.RUNNED:
@@ -375,6 +376,7 @@ export function run(command, {
 	shell = true,
 	prepareProcess,
 	dontSearchErrors,
+	ignoreProcessExitCode,
 	dontShowOutputs,
 	returnOutputs,
 }: IRunOptions = {}): Promise<IRunResult> {
@@ -384,44 +386,33 @@ export function run(command, {
 			return
 		}
 
-		console.log(colors.blue(`RUN: ${command}`))
+		const currentDir = process.cwd()
+		cwd = path.resolve(cwd || currentDir)
+		let cwdRelative = path.relative(currentDir, cwd)
+		if (cwdRelative.startsWith('..')) {
+			cwdRelative = cwd
+		}
+		if (cwdRelative === '.') {
+			cwdRelative = ''
+		}
+
+		const description = `${cwdRelative ? cwdRelative + '> ' : ''}${command}`
+
+		console.log(colors.blue(`RUN: ${description}`))
 
 		const runState = {
 			status   : RunStatus.RUNNED,
 			timeStart: Date.now(),
 			timeEnd  : void 0 as number,
 			command,
+			description,
 		}
 		runStates.push(runState)
-
-		let stdoutString: string = void 0
-		let stderrString: string = void 0
-		let stdbothString: string = void 0
-
-		const _resolve = () => {
-			runState.status = RunStatus.SUCCESS
-			runState.timeEnd = Date.now()
-			resolve(
-				returnOutputs
-					? {
-						out : stdoutString,
-						err : stderrString,
-						both: stdbothString,
-					}
-					: void 0,
-			)
-		}
-
-		const _reject = err => {
-			runState.status = RunStatus.ERROR
-			runState.timeEnd = Date.now()
-			reject(err)
-		}
 
 		const proc = spawn(
 			command,
 			{
-				cwd: cwd || process.cwd(),
+				cwd,
 				env: {
 					...process.env,
 					...env,
@@ -431,29 +422,67 @@ export function run(command, {
 				shell,
 			})
 
+		let stdoutString: string = void 0
+		let stderrString: string = void 0
+		let stdbothString: string = void 0
+
+		const _resolve = () => {
+			runState.status = RunStatus.SUCCESS
+			runState.timeEnd = Date.now()
+			Promise.all([
+				proc.stdout && new Promise(r => {
+					proc.stdout.on('end', r)
+					if (proc.stdout.readableEnded) {
+						r()
+					}
+				}),
+				proc.stderr && new Promise(r => {
+					proc.stderr.on('end', r)
+					if (proc.stderr.readableEnded) {
+						r()
+					}
+				}),
+			])
+				.then(() => {
+					resolve(
+						returnOutputs
+							? {
+								out : stdoutString,
+								err : stderrString,
+								both: stdbothString,
+							}
+							: void 0,
+					)
+				})
+		}
+
+		const _reject = err => {
+			runState.status = RunStatus.ERROR
+			runState.timeEnd = Date.now()
+			reject(err)
+		}
+
 		if (returnOutputs) {
 			if (proc.stdout) {
 				stdoutString = ''
 				stdbothString = ''
-				proc.stdout.pipe(new Writable({
-					write(chunk: Buffer, encoding: BufferEncoding | 'buffer', callback: (error?: (Error | null)) => void) {
-						const str = chunk.toString(encoding === 'buffer' ? void 0 : encoding)
-						stdoutString += str
-						stdbothString += str
-					},
-				}))
+				proc.stdout.on('data', chunk => {
+					// const encoding = proc.stdout.readableEncoding
+					const str = chunk.toString() // encoding === 'buffer' ? void 0 : encoding)
+					stdoutString += str
+					stdbothString += str
+				})
 			}
 
 			if (proc.stderr) {
 				stderrString = ''
 				stdbothString = ''
-				proc.stderr.pipe(new Writable({
-					write(chunk: Buffer, encoding: BufferEncoding | 'buffer', callback: (error?: (Error | null)) => void) {
-						const str = chunk.toString(encoding === 'buffer' ? void 0 : encoding)
-						stderrString += str
-						stdbothString += str
-					},
-				}))
+				proc.stderr.on('data', chunk => {
+					// const encoding = proc.stdout.readableEncoding
+					const str = chunk.toString() // encoding === 'buffer' ? void 0 : encoding)
+					stderrString += str
+					stdbothString += str
+				})
 			}
 		}
 
@@ -466,14 +495,14 @@ export function run(command, {
 				_reject('process.disconnect')
 			})
 			.on('close', (code, signal) => {
-				if (!dontSearchErrors && code) {
+				if (!ignoreProcessExitCode && code) {
 					_reject(`process.close(code=${code}, signal=${signal})`)
 				} else {
 					_resolve()
 				}
 			})
 			.on('exit', (code, signal) => {
-				if (!dontSearchErrors && code) {
+				if (!ignoreProcessExitCode && code) {
 					_reject(`process.exit(code=${code}, signal=${signal})`)
 				} else {
 					_resolve()
@@ -492,12 +521,12 @@ export function run(command, {
 				terminal: false,
 			}).on('line', line => {
 				try {
-					const error = stdOutSearchError(line)
+					const error = !dontSearchErrors && stdOutSearchError(line)
 					if (!dontShowOutputs && logFilter(line)) {
 						line = correctLog(line)
 						process.stdout.write(`${line}\r\n`)
 					}
-					if (!dontSearchErrors && error) {
+					if (error) {
 						_reject(`ERROR DETECTED: ${error}`)
 					}
 				} catch (ex) {

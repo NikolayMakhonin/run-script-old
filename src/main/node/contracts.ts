@@ -29,6 +29,7 @@ export interface IRunOptions {
 	shell?: boolean,
 	prepareProcess?: (proc: ChildProcess) => void,
 	dontSearchErrors?: boolean,
+	ignoreProcessExitCode?: boolean,
 	dontShowOutputs?: boolean,
 	returnOutputs?: boolean,
 }

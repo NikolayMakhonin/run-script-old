@@ -1,3 +1,19 @@
+0.2.9 / 2020-03-22
+===================
+
+  * Added ignoreProcessExitCode option
+  * Fix dontSearchErrors behavior
+  
+0.2.7 - 0.2.8 / 2020-03-22
+===================
+
+  * Fix return outputs
+  
+0.2.6 / 2000-01-01
+===================
+
+  * Improved the log
+  
 0.2.0 - 0.2.5 / 2000-01-01
 ===================
 
