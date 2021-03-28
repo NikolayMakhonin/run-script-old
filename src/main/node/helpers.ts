@@ -211,34 +211,34 @@ const runStates = []
 
 process.on('SIGTERM', () => {
 	console.log('SIGTERM')
-	killAll(true)
+	killAll({isFailure: true, syncKill: true})
 })
 process.on('SIGHUP', () => {
 	console.log('SIGHUP')
-	killAll(true)
+	killAll({isFailure: true, syncKill: true})
 })
 process.on('SIGINT', () => {
 	console.log('SIGINT')
-	killAll(true)
+	killAll({isFailure: true, syncKill: true})
 })
 process.on('SIGBREAK', () => {
 	console.log('SIGBREAK')
-	killAll(true)
+	killAll({isFailure: true, syncKill: true})
 })
 
 process.on('beforeExit', () => {
 	// console.log('beforeExit')
-	killAll()
+	killAll({isFailure: false, syncKill: false})
 })
 process.on('exit', () => {
 	console.log('exit')
-	// killAll()
+	killAll({isFailure: false, syncKill: true})
 })
 
 // process.on('disconnect', killAll)
 process.on('uncaughtException', err => {
 	printError('uncaughtException', err)
-	killAll(true)
+	killAll({isFailure: true, syncKill: false})
 })
 
 function printRunStates() {
@@ -339,7 +339,13 @@ function killByPids(...pids) {
 	}
 }
 
-function killAll(isFailure?: boolean) {
+function killAll({
+	isFailure,
+	syncKill,
+}: {
+	isFailure: boolean,
+	syncKill: boolean,
+}) {
 	if (wasKillAll) {
 		return
 	}
@@ -347,15 +353,27 @@ function killAll(isFailure?: boolean) {
 
 	console.log('Terminating...')
 
-	setTimeout(() => {
+	const kill = () => {
 		const procs = processList.filter(o => o.pid && !o.killed && o.pid !== process.pid)
 		const pids = procs.map(o => o.pid)
+
 		printRunStates()
 		killByPids(...pids)
-		if (isFailure || runStates.some(o => o.status === RunStatus.ERROR)) {
+		if (runStates.some(o => o.status === RunStatus.ERROR)) {
+			isFailure = true
+		}
+		runStates.length = 0
+
+		if (isFailure) {
 			process.exit(1)
 		}
-	}, 100)
+	}
+
+	if (syncKill) {
+		kill()
+	} else {
+		setTimeout(kill, 100)
+	}
 }
 
 // Buffer class
@@ -574,7 +592,7 @@ export const runOnce: typeof run = singleCall(run)
 ;(Promise.prototype as any).stopOnError = function stopOnError() {
 	return this.catch(err => {
 		printError('Kill on error', err)
-		killAll(true)
+		killAll({isFailure: true, syncKill: false})
 	})
 }
 

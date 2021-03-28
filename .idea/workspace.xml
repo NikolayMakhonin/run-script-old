@@ -20,6 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d52e1996-07d3-4492-b0b2-6fba29f4b076" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/HISTORY.md" beforeDir="false" afterPath="$PROJECT_DIR$/HISTORY.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/node/helpers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/node/helpers.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -195,20 +197,6 @@
     <configuration />
   </component>
   <component name="TaskManager">
-    <task id="LOCAL-00034" summary="Fix travis">
-      <created>1590668451281</created>
-      <option name="number" value="00034" />
-      <option name="presentableId" value="LOCAL-00034" />
-      <option name="project" value="LOCAL" />
-      <updated>1590668451281</updated>
-    </task>
-    <task id="LOCAL-00035" summary="Fix travis">
-      <created>1590668617393</created>
-      <option name="number" value="00035" />
-      <option name="presentableId" value="LOCAL-00035" />
-      <option name="project" value="LOCAL" />
-      <updated>1590668617393</updated>
-    </task>
     <task active="true" id="Default" summary="Default task">
       <changelist id="d52e1996-07d3-4492-b0b2-6fba29f4b076" name="Default Changelist" comment="" />
       <created>1590675764994</created>
@@ -239,7 +227,7 @@
       <workItem from="1616558537051" duration="70000" />
       <workItem from="1616912396765" duration="1979000" />
       <workItem from="1616915040122" duration="152000" />
-      <workItem from="1616931867523" duration="349000" />
+      <workItem from="1616931867523" duration="937000" />
     </task>
     <task id="LOCAL-00036" summary="Fix travis">
       <created>1590675855678</created>
@@ -570,7 +558,21 @@
       <option name="project" value="LOCAL" />
       <updated>1616932008281</updated>
     </task>
-    <option name="localTasksCounter" value="83" />
+    <task id="LOCAL-00083" summary="v0.2.13">
+      <created>1616932248952</created>
+      <option name="number" value="00083" />
+      <option name="presentableId" value="LOCAL-00083" />
+      <option name="project" value="LOCAL" />
+      <updated>1616932248952</updated>
+    </task>
+    <task id="LOCAL-00084" summary="v0.2.14">
+      <created>1616932443644</created>
+      <option name="number" value="00084" />
+      <option name="presentableId" value="LOCAL-00084" />
+      <option name="project" value="LOCAL" />
+      <updated>1616932443644</updated>
+    </task>
+    <option name="localTasksCounter" value="85" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -631,8 +633,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Precommit OK." />
-    <MESSAGE value="Fix travis" />
     <MESSAGE value="Fix nyc bug" />
     <MESSAGE value="Fix coverage" />
     <MESSAGE value="Lint fixes" />
@@ -656,13 +656,15 @@
     <MESSAGE value="v0.2.5 - Changed run() interface" />
     <MESSAGE value="v0.2.9" />
     <MESSAGE value="v0.2.11" />
-    <option name="LAST_COMMIT_MESSAGE" value="v0.2.11" />
+    <MESSAGE value="v0.2.13" />
+    <MESSAGE value="v0.2.14" />
+    <option name="LAST_COMMIT_MESSAGE" value="v0.2.14" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="-2" y="0" width="1922" height="882" key="CommitChangelistDialog2" timestamp="1616932241378">
+    <state x="-2" y="0" width="1922" height="882" key="CommitChangelistDialog2" timestamp="1616932441913">
       <screen x="0" y="0" width="1920" height="882" />
     </state>
-    <state x="-2" y="0" width="1922" height="882" key="CommitChangelistDialog2/0.0.1920.882@0.0.1920.882" timestamp="1616932241378" />
+    <state x="-2" y="0" width="1922" height="882" key="CommitChangelistDialog2/0.0.1920.882@0.0.1920.882" timestamp="1616932441913" />
     <state x="3" y="3" width="1912" height="874" key="DiffContextDialog" timestamp="1616558374212">
       <screen x="0" y="0" width="1920" height="882" />
     </state>
@@ -750,12 +752,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/main/node/helpers.ts</url>
-          <line>480</line>
+          <line>498</line>
           <option name="timeStamp" value="6" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/main/node/helpers.ts</url>
-          <line>469</line>
+          <line>487</line>
           <option name="timeStamp" value="7" />
         </line-breakpoint>
       </breakpoints>
