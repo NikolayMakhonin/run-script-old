@@ -348,10 +348,10 @@ function killAll(isFailure?: boolean) {
 	console.log('Terminating...')
 
 	setTimeout(() => {
-		const procs = processList.filter(o => o.pid && !o.killed)
+		const procs = processList.filter(o => o.pid && !o.killed && o.pid !== process.pid)
 		const pids = procs.map(o => o.pid)
-		killByPids(...pids)
 		printRunStates()
+		killByPids(...pids)
 		if (isFailure || runStates.some(o => o.status === RunStatus.ERROR)) {
 			process.exit(1)
 		}

@@ -19,11 +19,8 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d52e1996-07d3-4492-b0b2-6fba29f4b076" name="Default Changelist" comment="">
+    <list default="true" id="d52e1996-07d3-4492-b0b2-6fba29f4b076" name="Default Changelist" comment="v0.2.11">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HISTORY.md" beforeDir="false" afterPath="$PROJECT_DIR$/HISTORY.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/node/helpers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/node/helpers.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -198,20 +195,6 @@
     <configuration />
   </component>
   <component name="TaskManager">
-    <task id="LOCAL-00031" summary="Fix travis">
-      <created>1590667109651</created>
-      <option name="number" value="00031" />
-      <option name="presentableId" value="LOCAL-00031" />
-      <option name="project" value="LOCAL" />
-      <updated>1590667109651</updated>
-    </task>
-    <task id="LOCAL-00032" summary="Fix travis">
-      <created>1590667794649</created>
-      <option name="number" value="00032" />
-      <option name="presentableId" value="LOCAL-00032" />
-      <option name="project" value="LOCAL" />
-      <updated>1590667794649</updated>
-    </task>
     <task id="LOCAL-00033" summary="Fix travis">
       <created>1590668380010</created>
       <option name="number" value="00033" />
@@ -261,7 +244,8 @@
       <workItem from="1616557707711" duration="727000" />
       <workItem from="1616558502901" duration="7000" />
       <workItem from="1616558537051" duration="70000" />
-      <workItem from="1616912396765" duration="1077000" />
+      <workItem from="1616912396765" duration="1979000" />
+      <workItem from="1616915040122" duration="152000" />
     </task>
     <task id="LOCAL-00036" summary="Fix travis">
       <created>1590675855678</created>
@@ -571,7 +555,21 @@
       <option name="project" value="LOCAL" />
       <updated>1616912630176</updated>
     </task>
-    <option name="localTasksCounter" value="80" />
+    <task id="LOCAL-00080" summary="v0.2.9">
+      <created>1616913806365</created>
+      <option name="number" value="00080" />
+      <option name="presentableId" value="LOCAL-00080" />
+      <option name="project" value="LOCAL" />
+      <updated>1616913806365</updated>
+    </task>
+    <task id="LOCAL-00081" summary="v0.2.11">
+      <created>1616913911059</created>
+      <option name="number" value="00081" />
+      <option name="presentableId" value="LOCAL-00081" />
+      <option name="project" value="LOCAL" />
+      <updated>1616913911059</updated>
+    </task>
+    <option name="localTasksCounter" value="82" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -632,7 +630,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Merge branch 'browser-helpers' into node-module&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;package.json" />
     <MESSAGE value="Precommit OK." />
     <MESSAGE value="Fix travis" />
     <MESSAGE value="Fix nyc bug" />
@@ -657,13 +654,14 @@
     <MESSAGE value="v0.2.4 - Changed run() interface" />
     <MESSAGE value="v0.2.5 - Changed run() interface" />
     <MESSAGE value="v0.2.9" />
-    <option name="LAST_COMMIT_MESSAGE" value="v0.2.9" />
+    <MESSAGE value="v0.2.11" />
+    <option name="LAST_COMMIT_MESSAGE" value="v0.2.11" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="-2" y="0" width="1922" height="882" key="CommitChangelistDialog2" timestamp="1616912628691">
+    <state x="-2" y="0" width="1922" height="882" key="CommitChangelistDialog2" timestamp="1616914211008">
       <screen x="0" y="0" width="1920" height="882" />
     </state>
-    <state x="-2" y="0" width="1922" height="882" key="CommitChangelistDialog2/0.0.1920.882@0.0.1920.882" timestamp="1616912628691" />
+    <state x="-2" y="0" width="1922" height="882" key="CommitChangelistDialog2/0.0.1920.882@0.0.1920.882" timestamp="1616914211008" />
     <state x="3" y="3" width="1912" height="874" key="DiffContextDialog" timestamp="1616558374212">
       <screen x="0" y="0" width="1920" height="882" />
     </state>
