@@ -227,7 +227,7 @@ process.on('SIGBREAK', () => {
 })
 
 process.on('beforeExit', () => {
-	console.log('beforeExit')
+	// console.log('beforeExit')
 	killAll()
 })
 process.on('exit', () => {
