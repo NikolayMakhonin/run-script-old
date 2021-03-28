@@ -1,4 +1,4 @@
-0.2.9 / 2020-03-22
+0.2.9 - 0.2.10 / 2020-03-22
 ===================
 
   * Added ignoreProcessExitCode option
