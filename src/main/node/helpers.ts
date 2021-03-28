@@ -232,7 +232,7 @@ process.on('beforeExit', () => {
 })
 process.on('exit', () => {
 	console.log('exit')
-	killAll()
+	// killAll()
 })
 
 // process.on('disconnect', killAll)
